@@ -11,6 +11,7 @@ Skills pour [Claude Code](https://claude.com/claude-code), écrits en français 
 | [`debug-frontend`](debug-frontend/SKILL.md) | Reproduire et diagnostiquer un bug d'interface web (JS, HTML, CSS) avec Playwright et Chromium headless, en production ou sur une version locale servie en statique. |
 | [`release`](release/SKILL.md) | Publier une version : choisir le niveau (patch/minor/major) avec l'utilisateur, incrémenter le numéro, compléter l'historique, regrouper les commits, tagger et pousser. |
 | [`deploy-production`](deploy-production/SKILL.md) | Mettre en production en poussant la branche principale vers une branche de production dédiée, suivre le déploiement et le vérifier ; aussi republier une ancienne version. |
+| [`clarify-request`](clarify-request/SKILL.md) | Demander des précisions quand une demande peut se lire de deux façons, répond peut-être à une question précédente, manque d'une valeur ou porte sur une action difficile à défaire ; ne pas demander ce que le dépôt ou la conversation disent déjà. |
 
 ## Paramètres propres au dépôt
 
