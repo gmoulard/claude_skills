@@ -1,6 +1,6 @@
 ---
 name: todo
-description: Créer et tenir la feuille de route d'un dépôt (TODO.md) selon le modèle maison — actions numérotées TODO-x.y, états [ ] [~] [!] [x], « Dépend de : », critères d'acceptation, actions validées déplacées dans Todo-done.md, demandes de l'utilisateur relevées dans Todo-ithem-for-todo.md. À utiliser pour créer un TODO, et dans le même changement que tout travail qui avance, bloque ou termine une action.
+description: Créer et tenir la feuille de route d'un dépôt (TODO.md) selon le modèle maison — actions numérotées TODO-x.y, états [ ] [~] [!] [x], « Dépend de : », critères d'acceptation, lots LOT-n confiés au sous-agent todo-lot, actions validées déplacées dans Todo-done.md, demandes de l'utilisateur relevées dans Todo-ithem-for-todo.md. À utiliser pour créer un TODO, et dans le même changement que tout travail qui avance, bloque ou termine une action.
 ---
 
 # Feuille de route (TODO)
@@ -32,6 +32,27 @@ Dans le `CLAUDE.md` du dépôt : dire que le TODO se lit avant toute modificatio
 - **Une action abandonnée** : barrée (`~~…~~`), cochée `[x]`, avec la date et la raison (« Retiré le AAAA-MM-JJ : … »).
 - Une décision de l'utilisateur se note avec sa date (« Tranché le AAAA-MM-JJ : … ») et se reporte dans la spécification.
 
+## Lots
+
+Un lot (`LOT-n`) est un groupe d'actions cohérent, réalisable d'un seul tenant par le sous-agent [`todo-lot`](../agents/todo-lot.md), dans un contexte séparé. Les lots sont listés dans un tableau « Lots » en tête du TODO, après la légende ; les sections et les actions ne bougent pas.
+
+```markdown
+## Lots
+
+| Lot | Titre | Actions | Dépend de | État |
+|-----|-------|---------|-----------|------|
+| LOT-1 | <titre> | TODO-2.1, TODO-2.3 | aucun | [ ] |
+| LOT-2 | <titre> | TODO-4.1 à TODO-4.4 | LOT-1 | [ ] |
+```
+
+- **Cohérent** : mêmes fichiers, même sujet, même compétence (décisions, étude, serveur, écran…). Une action appartient à un seul lot.
+- **Taille** : 2 à 8 actions. Au-delà, couper : un contexte qui grossit coûte plus de tokens qu'un nouveau lot.
+- **Ordre** : un lot ne dépend que de lots précédents ; « Dépend de » liste les lots, pas les actions.
+- **État** du lot : `[ ]` aucune action commencée ; `[~]` en cours ; `[!]` tout ce qui reste attend l'utilisateur ; `[x]` toutes ses actions `[x]`.
+- **Lot de décisions** : le sous-agent ne tranche rien, il rend les questions ; la session principale les pose à l'utilisateur puis trace les décisions.
+- **Lancer** : un lot à la fois, de préférence, car tous modifient le TODO. Deux lots en parallèle seulement s'ils ne touchent pas les mêmes fichiers de spécification, chacun dans son propre worktree.
+- Nouvelle action : l'ajouter au lot ouvert du même sujet, ou créer un lot.
+
 ## Faire avancer
 
 1. Avant de travailler : lire `Todo-ithem-for-todo.md`. Chaque demande devient une action numérotée (ou complète une action existante) dans la bonne section, puis est retirée de ce fichier.
@@ -44,4 +65,5 @@ Dans le `CLAUDE.md` du dépôt : dire que le TODO se lit avant toute modificatio
 
 - Numéros en double : `grep -ohE 'TODO-[0-9]+\.[0-9]+\*\*' <TODO> <done> | sort | uniq -d` (doit être vide).
 - Chaque action ouverte a ses critères : `grep -A1 -E '^\s*- \[[ ~!]\] \*\*TODO-' <TODO> | grep -c "Critères d'acceptation"` égale le nombre d'actions ouvertes.
+- Chaque action ouverte est dans exactement un lot.
 - `Todo-ithem-for-todo.md` est vide en fin de travail.

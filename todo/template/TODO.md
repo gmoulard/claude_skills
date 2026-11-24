@@ -12,6 +12,14 @@ Feuille de route de <projet>, dans l'ordre de construction de la [spécification
   <label><input id="todo-show-blocked" type="checkbox" checked> Bloquées</label>
 </div>
 
+## Lots
+
+Groupes d'actions cohérents, réalisés chacun par le sous-agent `todo-lot` (une action = un commit poussé).
+
+| Lot | Titre | Actions | Dépend de | État |
+|-----|-------|---------|-----------|------|
+| LOT-1 | <titre> | TODO-2.1, TODO-2.2 | aucun | [ ] |
+
 ## 0. Ménage du dépôt
 
 Tout est réalisé : voir [Actions réalisées](Todo-done.md).
