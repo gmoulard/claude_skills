@@ -14,6 +14,14 @@ Skills pour [Claude Code](https://claude.com/claude-code), écrits en français 
 | [`todo`](todo/SKILL.md) | Créer et tenir la feuille de route `TODO.md` selon le modèle maison (actions `TODO-x.y`, états `[ ]` `[~]` `[!]` `[x]`, dépendances, critères d'acceptation, `Todo-done.md`, boîte de réception) ; modèles et filtres du site dans [`todo/template/`](todo/template/). |
 | [`clarify-request`](clarify-request/SKILL.md) | Demander des précisions quand une demande peut se lire de deux façons, répond peut-être à une question précédente, manque d'une valeur ou porte sur une action difficile à défaire ; ne pas demander ce que le dépôt ou la conversation disent déjà. |
 
+## Agents
+
+Sous-agents pour Claude Code, dans [`agents/`](agents/). Un sous-agent travaille dans son propre contexte et ne renvoie qu'un compte rendu court à la session principale : il ménage ses tokens.
+
+| Agent | Description |
+|-------|-------------|
+| [`todo-lot`](agents/todo-lot.md) | Réalise un lot du TODO (`LOT-n`, groupe d'actions cohérent défini par le skill [`todo`](todo/SKILL.md)) : une action = un commit poussé ; rend les questions qui attendent une décision de l'utilisateur. Lancement : « Réalise LOT-3 avec l'agent todo-lot ». |
+
 ## Paramètres propres au dépôt
 
 Chaque skill lit ses valeurs propres au dépôt (fichier de version, branches, commandes de tests, adresse de production, sélecteurs, etc.) dans une section « Paramètres des skills » du `CLAUDE.md` du dépôt qui l'utilise. Un sous-titre par skill, par exemple :
@@ -62,4 +70,10 @@ Sous Windows (PowerShell, mode développeur ou administrateur) :
 New-Item -ItemType SymbolicLink -Path "$HOME\.claude\skills\release" -Target "$PWD\claude_skills\release"
 ```
 
-Les skills installés apparaissent dans Claude Code au démarrage suivant de la session.
+Les agents s'installent de la même façon, fichier par fichier, dans `~/.claude/agents/` (tous les projets) ou `.claude/agents/` (un projet) :
+
+```bash
+ln -s "$PWD/claude_skills/agents/todo-lot.md" ~/.claude/agents/todo-lot.md
+```
+
+Les skills et agents installés apparaissent dans Claude Code au démarrage suivant de la session.
