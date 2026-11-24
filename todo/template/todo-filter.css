@@ -1,0 +1,10 @@
+.todo-filters { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; margin: 1rem 0; padding: 0.75rem 1rem; border: 1px solid var(--line); border-radius: 0.75rem; background: #ffffff; }
+.todo-filters label { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; }
+.todo-filters button { font: inherit; font-weight: 700; padding: 0.25rem 0.875rem; border: 1px solid var(--line); border-radius: 999px; background: #ffffff; cursor: pointer; }
+.todo-filters button[aria-pressed="true"] { background: #c71f5d; border-color: #c71f5d; color: #ffffff; }
+.prose li[hidden] { display: none !important; }
+.prose li.todo-context { opacity: 0.75; }
+.todo-state { display: inline-grid; place-items: center; width: 1.1em; height: 1.1em; margin-inline-end: 0.35em; border-radius: 0.25em; font-size: 0.85em; font-weight: 700; line-height: 1; vertical-align: -0.1em; color: #ffffff; }
+.todo-state-progress { background: #b45309; }
+.todo-state-blocked { background: #b91c1c; }
+.todo-count { font-weight: 400; color: var(--muted, #555555); }

@@ -11,6 +11,7 @@ Skills pour [Claude Code](https://claude.com/claude-code), écrits en français 
 | [`debug-frontend`](debug-frontend/SKILL.md) | Reproduire et diagnostiquer un bug d'interface web (JS, HTML, CSS) avec Playwright et Chromium headless, en production ou sur une version locale servie en statique. |
 | [`release`](release/SKILL.md) | Publier une version : choisir le niveau (patch/minor/major) avec l'utilisateur, incrémenter le numéro, compléter l'historique, regrouper les commits, tagger et pousser. |
 | [`deploy-production`](deploy-production/SKILL.md) | Mettre en production en poussant la branche principale vers une branche de production dédiée, suivre le déploiement et le vérifier ; aussi republier une ancienne version. |
+| [`todo`](todo/SKILL.md) | Créer et tenir la feuille de route `TODO.md` selon le modèle maison (actions `TODO-x.y`, états `[ ]` `[~]` `[!]` `[x]`, dépendances, critères d'acceptation, `Todo-done.md`, boîte de réception) ; modèles et filtres du site dans [`todo/template/`](todo/template/). |
 | [`clarify-request`](clarify-request/SKILL.md) | Demander des précisions quand une demande peut se lire de deux façons, répond peut-être à une question précédente, manque d'une valeur ou porte sur une action difficile à défaire ; ne pas demander ce que le dépôt ou la conversation disent déjà. |
 
 ## Paramètres propres au dépôt
@@ -24,6 +25,10 @@ Chaque skill lit ses valeurs propres au dépôt (fichier de version, branches, c
   - fichier de version : `app/version.py` (`VERSION = "x.y.z"`) ;
   - branche principale : `main` ;
   - tests : `python -m unittest discover -s tests`.
+- **`todo`** :
+  - TODO : `docs/TODO.md` ; actions réalisées : `docs/Todo-done.md` ; boîte de réception : `docs/Todo-ithem-for-todo.md` ;
+  - spécification : `docs/specification.md` ;
+  - filtres : oui (site GitHub Pages, `docs/_layouts/default.html`).
 - **`deploy-production`** :
   - branche de production : `production` ;
   - workflow : « Deploy » (`.github/workflows/deploy.yml`).
